@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Nuevo Ticket</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/generarTicket.css">
+</head>
+
+<body>
+    <nav class="navbar navbar-dark bg-dark">
+        <a class="nav-link" href="index.html"> Index</a>
+        <a class="nav-link" href="publico.html">Tickets</a>
+    </nav>
+    <div class="mainContent">
+        <div class="generateButtons">
+            <div class="ticketOptions"> <span id="lblNuevoTicketEspecial">
+                    Cargando...
+                </span></div>
+            <div class="ticketOptions"> <span id="lblNuevoTicketRapida">
+                    Cargando...
+                </span></div>
+            <div class="ticketOptions"> <span id="lblNuevoTicketCaja">
+                    Cargando...
+                </span></div>
+        </div>
+
+        <div class="ticketsInfo">
+            <div>
+                <button class="btn btn-secondary btn-lg" id="especial">
+                    <img src="../img/especial.png" width="90px" height="90px" alt="">
+                    Ventanilla Preferecial
+                </button>
+            </div>
+            <div>
+                <button class="btn btn-secondary btn-lg" id="rapida">
+                    <img src="../img/empresarial.png" width="90px" height="90px" alt="">
+                    Ventanilla Empresarial
+                </button>
+                <br>
+            </div>
+            <div>
+                <button class="btn btn-secondary btn-lg" id="caja">
+                    <img src="../img/caja.png" width="90px" height="90px" alt="">
+                    Caja
+                </button>
+            </div>
+        </div>
+
+    </div>
+
+    <script src="js/libs/jquery.min.js"></script>
+    <script src="socket.io/socket.io.js"></script>
+    <script src="js/socket-nuevoTicket.js"></script>
+
+</body>
+
+</html>

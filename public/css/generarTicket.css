@@ -1,0 +1,23 @@
+.mainContent{
+    display: grid;
+    grid-template-rows: 20vh calc(100% - 20vh);
+    row-gap: 10px;
+}
+.generateButtons{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 10px;
+    padding: 10px;
+    background-color: orange;
+}
+
+.ticketOptions{
+    background-color: greenyellow;
+}
+.ticketsInfo{
+    display: grid;
+    grid-template-columns: auto auto auto;
+    column-gap: 10px;
+    padding-top: 10px;
+    padding-left: 8vw;
+}
