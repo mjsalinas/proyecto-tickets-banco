@@ -95,6 +95,7 @@ debugger
     }
     //Saber cual es el ultimo ticket
     getUltimoTicket() {
+        
         return `Ultimo Ticket: ${this.ultimo}`;
     }
     getUltimoTicketRapida() {
@@ -106,12 +107,7 @@ debugger
     getUltimos4() {
         return this.ultimos4;
     }
-    getUltimos4Rapida() {
-        return this.ultimos4Rapida;
-    }
-    getUltimos4Caja() {
-        return this.ultimos4Caja;
-    }
+ 
     //Funcion para caja y pantalla clientes
     atenderTicket(caja) {
         //Verifico si hay tickets por atender y no hago nada

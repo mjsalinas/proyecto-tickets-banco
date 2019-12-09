@@ -8,16 +8,24 @@
     grid-template-columns: auto auto auto;
     column-gap: 10px;
     padding: 10px;
-    background-color: orange;
+    background-color: #180d3f;
 }
 
 .ticketOptions{
-    background-color: greenyellow;
+    font-size: 28px;
+    text-align: center;
+    color: black;
+    background-color: white
 }
 .ticketsInfo{
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: 33% 40% 30%;
     column-gap: 10px;
     padding-top: 10px;
-    padding-left: 8vw;
+    padding-left: 6vw;
+}
+
+.cajas{
+    display: grid;
+    grid-template-columns: auto auto auto;
 }

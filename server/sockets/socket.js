@@ -40,11 +40,11 @@ io.on('connection', (client) => {
     })
     client.emit('estadoActualRapida', {
         actual: ticketControl.getUltimoTicketRapida(),
-        ultimos4: ticketControl.getUltimos4Rapida()
+        ultimos4: ticketControl.getUltimos4()
     })
     client.emit('estadoActualCaja', {
         actual: ticketControl.getUltimoTicketCaja(),
-        ultimos4: ticketControl.getUltimos4Caja()
+        ultimos4: ticketControl.getUltimos4()
     })
     //Escuchar al evento atender ticket, callback para notificar el ticket que le toca al escritorio
     client.on('atenderTicket', (data, callback) => {
@@ -82,7 +82,7 @@ io.on('connection', (client) => {
         callback(atenderTicket);
         //Actulizar cambios en os ultimos 4, emitir ultimos 4 en el socket publico
         client.broadcast.emit('ultimos4', {
-            ultimos4: ticketControl.getUltimos4Rapida()
+            ultimos4: ticketControl.getUltimos4()
         })
     })
     client.on('atenderTicketCaja', (data, callback) => {
@@ -101,7 +101,7 @@ io.on('connection', (client) => {
         callback(atenderTicket);
         //Actulizar cambios en os ultimos 4, emitir ultimos 4 en el socket publico
         client.broadcast.emit('ultimos4', {
-            ultimos4: ticketControl.getUltimos4Caja()
+            ultimos4: ticketControl.getUltimos4()
         })
     })
 });

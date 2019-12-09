@@ -9,25 +9,42 @@
 
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/generarTicket.css">
+
 </head>
 
 <body class="container">
     <h1>Banco Ficohsa</h1>
     <div id="app"></div>
     <nav class="navbar navbar-dark bg-dark">
-        <a class="nav-link" href="nuevoTicket.html"> Generar Ticket</a>
-        <a class="nav-link" href="publico.html">Tickets</a>
-    </nav>
-    <div class="row">
-        <div class="col-6">
-            <form action="caja.html">
-                <input name="caja" type="number" class="form-control" placeholder="Caja" autofocus required>
+            <a class="nav-link" href="nuevoTicket.html"> Generar Ticket</a>
+            <a class="nav-link" href="publico.html"> Tickets</a>
+        </nav>
+    <div>
+        <div class="cajas">
 
-                <br>
-                <button type="submit" class="btn btn-primary">
-                    Ingresar
+            <form action="caja-preferencial.html">
+                <input name="caja" type="hidden" class="form-control" value="1">
+                <button class="btn btn-primary" type="submit">
+                    <img src="../img/especial.png" width="90px" height="90px" alt="">
+                    Ventanilla Preferecial
                 </button>
             </form>
+            <form action="caja-empresarial.html">
+                <input name="caja" type="hidden" class="form-control" value="2">
+                <button class="btn btn-primary" type="submit">
+                    <img src="../img/empresarial.png" width="90px" height="90px" alt="">
+                    Ventanilla Empresarial
+                </button>
+            </form>
+            <form action="caja.html">
+                <input name="caja" type="hidden" class="form-control" value="3">
+                <button class="btn btn-primary" type="submit">
+                    <img src="../img/caja.png" width="90px" height="90px" alt="">
+                    Ventanilla Normal
+                </button>
+            </form>
+
         </div>
     </div>
 
