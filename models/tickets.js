@@ -3,6 +3,7 @@ const { Schema } = mongoose;
 
 const TicketSchema = new Schema({
     noTicket: Number,
+    noCaja: Number,
 
 });
 

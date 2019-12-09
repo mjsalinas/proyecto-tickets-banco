@@ -2,20 +2,25 @@ const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
 const app = express();
+const bodyParser = require('body-parser');
+
 
 //conexion a mongodb 
 const { mongoose } = require('../database.js');
 
 //settings
 app.set('port', process.env.PORT || 3000);
-
+app.set('views', path.join(__dirname, '../public'))
 //middlewares
 app.use(morgan('dev'));
 app.use(express.json());
+//parse application/x-www-from-urlencode
+app.use(bodyParser.urlencoded({ extended: false}));
 
-//routes
-// app.use('/api/tickets', require('../routes/tickets.routes'));
+//parse application/json
+app.use(bodyParser.json());
 
+app.use(require('../routes/tickets.routes'));
 //static files
 app.use(express.static(path.join(__dirname, '../public')));
 

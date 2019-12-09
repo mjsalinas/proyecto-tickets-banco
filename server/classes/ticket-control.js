@@ -50,7 +50,7 @@ class TicketControl {
             this.ticketsRapida = dataRapida.tickets;
             this.ticketsCaja = dataCaja.tickets;
             console.log(this.ticketsRapida);
-debugger
+            debugger
             this.ultimos4 = data.ultimos4;
             this.ultimos4Rapida = dataRapida.ultimos4;
             this.ultimos4Caja = dataCaja.ultimos4;
@@ -95,19 +95,22 @@ debugger
     }
     //Saber cual es el ultimo ticket
     getUltimoTicket() {
-        
+
         return `Ultimo Ticket: ${this.ultimo}`;
     }
     getUltimoTicketRapida() {
         return `Ultimo Ticket: ${this.ultimoRapida}`;
-    } 
+    }
     getUltimoTicketCaja() {
         return `Ultimo Ticket: ${this.ultimoCaja}`;
     }
     getUltimos4() {
-        return this.ultimos4;
+        let ultimos = [this.ultimo, this.ultimoRapida, this.ultimoCaja];
+        console.log("ultimos ultuimsom");
+        console.log(ultimos);
+        return ultimos;
     }
- 
+
     //Funcion para caja y pantalla clientes
     atenderTicket(caja) {
         //Verifico si hay tickets por atender y no hago nada
@@ -179,7 +182,7 @@ debugger
         if (this.ultimos4Caja.length > 4) {
             this.ultimos4Caja.splice(-1, 1);
         }
-        console.log('Ultimos 4 caja' );
+        console.log('Ultimos 4 caja');
         console.log(this.ultimos4Caja);
 
         this.grabarArchivoCaja();

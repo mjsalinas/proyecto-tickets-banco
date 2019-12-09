@@ -1,7 +1,11 @@
 const express = require('express');
 const Ticket = require('../models/tickets');
 const router = express.Router();
+//Importamos la clase TicketControl
+const { TicketControl } = require('../server/classes/ticket-control');
 
+//Disparamos el constructor de la clase
+const ticketControl = new TicketControl();
 router.get('/', async (req, res) => {
     try {
         const response = await Ticket.find()
@@ -12,13 +16,18 @@ router.get('/', async (req, res) => {
       }
 });
 
-router.post('/', async (req, res) => {
-    const { noTicket } = req.body;
+router.post('/add', async (req, res) => {
+    const body = req.body;
+    console.log('body');
+    console.log(req);
+    const tick = ticketControl.atenderTicketRapida(2);
     const newT = new Ticket({
-        noTicket: noTicket,
+      noCaja: body.caja, 
+      noTicket: body.num
     });
-    await newT.save();
-    res.json({status: 'Ticket creado'});
+    await tick.save();
+    // res.json({status: 'Ticket agregado'});
+    res.json({tick});
 });
 
 

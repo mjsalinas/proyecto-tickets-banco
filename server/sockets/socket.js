@@ -34,6 +34,7 @@ io.on('connection', (client) => {
         callback(siguiente);
     })
     //Llamamos y retornamos el objeto ultimo ticket
+    
     client.emit('estadoActualEspecial', {
         actual: ticketControl.getUltimoTicket(),
         ultimos4: ticketControl.getUltimos4()
