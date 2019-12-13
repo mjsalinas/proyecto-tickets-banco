@@ -22,7 +22,6 @@ $('h1').text('Caja ' + caja)
 $('button').on('click', () => {
     debugger;
     //Llamamos al socket atender ticket
-
     if (caja === "1") {
         info = { caja: caja, tipo: 'preferencial' };
     } else if (caja === "2") {

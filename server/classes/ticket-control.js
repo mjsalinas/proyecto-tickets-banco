@@ -22,44 +22,44 @@ class TicketCaja {
 }
 class TicketControl {
     constructor() {
-        //Inicializando la clase
-        this.ultimo = 0;
-        this.ultimoRapida = 0;
-        this.ultimoCaja = 0;
-        this.hoy = new Date().getDate();
-        //Tickets sin atender
-        this.tickets = [];
-        this.ticketsRapida = [];
-        this.ticketsCaja = [];
-        //Pantalla
-        this.ultimos4 = [];
-        this.ultimos4Rapida = [];
-        this.ultimos4Caja = [];
-        //Para que no se pierda por si cae el sistema
-        let data = require('../data/data.json');
-        let dataRapida = require('../data/dataRapida.json');
-        let dataCaja = require('../data/dataCaja.json');
+            //Inicializando la clase
+            this.ultimo = 0;
+            this.ultimoRapida = 0;
+            this.ultimoCaja = 0;
+            this.hoy = new Date().getDate();
+            //Tickets sin atender
+            this.tickets = [];
+            this.ticketsRapida = [];
+            this.ticketsCaja = [];
+            //Pantalla
+            this.ultimos4 = [];
+            this.ultimos4Rapida = [];
+            this.ultimos4Caja = [];
+            //Para que no se pierda por si cae el sistema
+            let data = require('../data/data.json');
+            let dataRapida = require('../data/dataRapida.json');
+            let dataCaja = require('../data/dataCaja.json');
 
-        //Validacion para comenzar nuevos tickets en diferentes dias
-        if (data.hoy === this.hoy) {
-            this.ultimo = data.ultimo;
-            this.ultimoRapida = dataRapida.ultimo;
-            this.ultimoCaja = dataCaja.ultimo;
+            //Validacion para comenzar nuevos tickets en diferentes dias
+            if (data.hoy === this.hoy) {
+                this.ultimo = data.ultimo;
+                this.ultimoRapida = dataRapida.ultimo;
+                this.ultimoCaja = dataCaja.ultimo;
 
-            this.tickets = data.tickets;
-            this.ticketsRapida = dataRapida.tickets;
-            this.ticketsCaja = dataCaja.tickets;
-            console.log(this.ticketsRapida);
-            debugger
-            this.ultimos4 = data.ultimos4;
-            this.ultimos4Rapida = dataRapida.ultimos4;
-            this.ultimos4Caja = dataCaja.ultimos4;
+                this.tickets = data.tickets;
+                this.ticketsRapida = dataRapida.tickets;
+                this.ticketsCaja = dataCaja.tickets;
+                console.log(this.ticketsRapida);
+                debugger
+                this.ultimos4 = data.ultimos4;
+                this.ultimos4Rapida = dataRapida.ultimos4;
+                this.ultimos4Caja = dataCaja.ultimos4;
 
-        } else {
-            this.reiniciarConteo();
+            } else {
+                this.reiniciarConteo();
+            }
         }
-    }
-    //Funcion para saber cual es el siguiente ticket
+        //Funcion para saber cual es el siguiente ticket
     siguienteTicket() {
         //Va incrementarlo en 1
         this.ultimo += 1;
@@ -83,17 +83,17 @@ class TicketControl {
         return `Ultimo Ticket: ${this.ultimoRapida}`;
     }
     siguienteTicketCaja() {
-        //Va incrementarlo en 1
-        this.ultimoCaja += 1;
-        //Instancia de un ticket para uno nuevo
-        let ticket = new TicketCaja(this.ultimoCaja, null);
-        //Agregandolo al arreglo ticket
-        this.ticketsCaja.push(ticket);
-        this.grabarArchivoCaja();
-        //Va regresar el numero de ticket
-        return `Ultimo Ticket: ${this.ultimoCaja}`;
-    }
-    //Saber cual es el ultimo ticket
+            //Va incrementarlo en 1
+            this.ultimoCaja += 1;
+            //Instancia de un ticket para uno nuevo
+            let ticket = new TicketCaja(this.ultimoCaja, null);
+            //Agregandolo al arreglo ticket
+            this.ticketsCaja.push(ticket);
+            this.grabarArchivoCaja();
+            //Va regresar el numero de ticket
+            return `Ultimo Ticket: ${this.ultimoCaja}`;
+        }
+        //Saber cual es el ultimo ticket
     getUltimoTicket() {
 
         return `Ultimo Ticket: ${this.ultimo}`;
@@ -105,10 +105,10 @@ class TicketControl {
         return `Ultimo Ticket: ${this.ultimoCaja}`;
     }
     getUltimos4() {
-        let ultimos = [this.ultimo, this.ultimoRapida, this.ultimoCaja];
-        console.log("ultimos ultuimsom");
-        console.log(ultimos);
-        return ultimos;
+        /* let ultimos = [this.ultimo, this.ultimoRapida, this.ultimoCaja];
+         console.log("ultimos ultuimsom");
+         console.log(ultimos);*/
+        return this.ultimos4;
     }
 
     //Funcion para caja y pantalla clientes
@@ -165,59 +165,59 @@ class TicketControl {
         return atenderTicket;
     }
     atenderTicketCaja(caja) {
-        //Verifico si hay tickets por atender y no hago nada
-        if (this.ticketsCaja.length === 0) {
-            return 'No hay tickets en caja';
+            //Verifico si hay tickets por atender y no hago nada
+            if (this.ticketsCaja.length === 0) {
+                return 'No hay tickets en caja';
+            }
+            //Tomamos del primer numero pendiente
+            let numeroTicket = this.ticketsCaja[0].num;
+            //Eliminamos el ticket que voy atendiendo
+            this.ticketsCaja.shift();
+            //Ticket por atender
+            let atenderTicket = new TicketCaja(numeroTicket, caja);
+            //agregarlo al inicio del arreglo ultimos4
+            this.ultimos4Caja.unshift(atenderTicket);
+
+            //Borrar ultimo elemento de pantalla porque ya no caben mas de 4
+            if (this.ultimos4Caja.length > 4) {
+                this.ultimos4Caja.splice(-1, 1);
+            }
+            console.log('Ultimos 4 caja');
+            console.log(this.ultimos4Caja);
+
+            this.grabarArchivoCaja();
+
+            return atenderTicket;
         }
-        //Tomamos del primer numero pendiente
-        let numeroTicket = this.ticketsCaja[0].num;
-        //Eliminamos el ticket que voy atendiendo
-        this.ticketsCaja.shift();
-        //Ticket por atender
-        let atenderTicket = new TicketCaja(numeroTicket, caja);
-        //agregarlo al inicio del arreglo ultimos4
-        this.ultimos4Caja.unshift(atenderTicket);
-
-        //Borrar ultimo elemento de pantalla porque ya no caben mas de 4
-        if (this.ultimos4Caja.length > 4) {
-            this.ultimos4Caja.splice(-1, 1);
-        }
-        console.log('Ultimos 4 caja');
-        console.log(this.ultimos4Caja);
-
-        this.grabarArchivoCaja();
-
-        return atenderTicket;
-    }
-    //Reiniciar los valores
+        //Reiniciar los valores
     reiniciarConteo() {
-        this.ultimo = 0;
-        this.ultimoRapida = 0;
-        this.ultimoCaja = 0;
+            this.ultimo = 0;
+            this.ultimoRapida = 0;
+            this.ultimoCaja = 0;
 
-        this.tickets = [];
-        this.ticketsRapida = [];
-        this.ticketsCaja = [];
+            this.tickets = [];
+            this.ticketsRapida = [];
+            this.ticketsCaja = [];
 
-        this.ultimos4 = [];
-        this.ultimos4Rapida = [];
-        this.ultimos4Caja = [];
-        console.log("Se ha inicializado el sistema");
-        this.grabarArchivo();
-        this.grabarArchivoRapida();
-        this.grabarArchivoCaja();
-    }
-    //Grabar los cambios
+            this.ultimos4 = [];
+            this.ultimos4Rapida = [];
+            this.ultimos4Caja = [];
+            console.log("Se ha inicializado el sistema");
+            this.grabarArchivo();
+            this.grabarArchivoRapida();
+            this.grabarArchivoCaja();
+        }
+        //Grabar los cambios
     grabarArchivo() {
         let jsonData = {
-            ultimo: this.ultimo,
-            hoy: this.hoy,
-            //Grabar tickets pendientes
-            tickets: this.tickets,
-            //Grabar ultimos 4 atendidos
-            ultimos4: this.ultimos4
-        }
-        //Pasarlo a string para grabarlo en el txt
+                ultimo: this.ultimo,
+                hoy: this.hoy,
+                //Grabar tickets pendientes
+                tickets: this.tickets,
+                //Grabar ultimos 4 atendidos
+                ultimos4: this.ultimos4
+            }
+            //Pasarlo a string para grabarlo en el txt
         let jsonDataString = JSON.stringify(jsonData);
         //Guardandolo
         fs.writeFileSync('./server/data/data.json', jsonDataString)
@@ -225,14 +225,14 @@ class TicketControl {
     }
     grabarArchivoRapida() {
         let jsonData = {
-            ultimo: this.ultimoRapida,
-            hoy: this.hoy,
-            //Grabar tickets pendientes
-            tickets: this.ticketsRapida,
-            //Grabar ultimos 4 atendidos
-            ultimos4: this.ultimos4Rapida
-        }
-        //Pasarlo a string para grabarlo en el txt
+                ultimo: this.ultimoRapida,
+                hoy: this.hoy,
+                //Grabar tickets pendientes
+                tickets: this.ticketsRapida,
+                //Grabar ultimos 4 atendidos
+                ultimos4: this.ultimos4Rapida
+            }
+            //Pasarlo a string para grabarlo en el txt
         let jsonDataString = JSON.stringify(jsonData);
         //Guardandolo
         fs.writeFileSync('./server/data/dataRapida.json', jsonDataString)
@@ -240,14 +240,14 @@ class TicketControl {
     }
     grabarArchivoCaja() {
         let jsonData = {
-            ultimo: this.ultimoCaja,
-            hoy: this.hoy,
-            //Grabar tickets pendientes
-            tickets: this.ticketsCaja,
-            //Grabar ultimos 4 atendidos
-            ultimos4: this.ultimos4Caja
-        }
-        //Pasarlo a string para grabarlo en el txt
+                ultimo: this.ultimoCaja,
+                hoy: this.hoy,
+                //Grabar tickets pendientes
+                tickets: this.ticketsCaja,
+                //Grabar ultimos 4 atendidos
+                ultimos4: this.ultimos4Caja
+            }
+            //Pasarlo a string para grabarlo en el txt
         let jsonDataString = JSON.stringify(jsonData);
         //Guardandolo
         fs.writeFileSync('./server/data/dataCaja.json', jsonDataString)
